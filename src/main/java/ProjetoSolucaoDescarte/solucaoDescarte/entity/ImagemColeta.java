@@ -11,8 +11,8 @@ public class ImagemColeta {
     private String caminhoImagem;
 
     @ManyToOne
-    @JoinColumn(name = "Coleta_id")
-    private Coleta Coleta;
+    @JoinColumn(name = "coleta_id")
+    private Coleta coleta;
 
     public Long getId() {
         return id;
@@ -31,10 +31,10 @@ public class ImagemColeta {
     }
 
     public Coleta getColeta() {
-        return Coleta;
+        return coleta;
     }
 
     public void setColeta(Coleta coleta) {
-        Coleta = coleta;
+        this.coleta = coleta;
     }
 }

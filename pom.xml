@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>ProjetoSolucaoDescarte</groupId>
-	<artifactId>Descarte_De_Residuos</artifactId>
+	<artifactId>solucaoDescarte</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>solucaoDescarte</name>
 	<description>Projeto de nivelamento que busca encontrar uma solução para o descarte impróprio de resíduos</description>

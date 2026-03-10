@@ -14,7 +14,7 @@ public class Coleta {
     private String endereco;
     private String categoria_residuo;
 
-    @OneToMany(mappedBy = "solicitarColeta")
+    @OneToMany(mappedBy = "coleta")
     private List<ImagemColeta> imagensColeta;
 
     public Coleta(){
