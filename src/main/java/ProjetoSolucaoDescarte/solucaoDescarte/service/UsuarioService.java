@@ -2,10 +2,9 @@ package ProjetoSolucaoDescarte.solucaoDescarte.service;
 
 import ProjetoSolucaoDescarte.solucaoDescarte.entity.Usuario;
 import ProjetoSolucaoDescarte.solucaoDescarte.repository.UsuarioRepository;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
 
 @Service
 public class UsuarioService {
@@ -17,17 +16,18 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
 
-//    public Usuario criarUsuario(String nome, String email, String senha, String telefone, LocalDate dataNascimento) {
-//        Usuario usuario = new Usuario();
-//
-//        usuario.setNome(nome);
-//        usuario.setEmail(email);
-//        usuario.setSenha(senha);
-//        usuario.setTelefone(telefone);
-//        usuario.setDataNascimento(dataNascimento);
-//
-//        return usuarioRepository.save(usuario);
-//    }
+    public void cadastrarUsuario(Usuario usuario){
+        usuarioRepository.save(usuario);
+    }
 
+    public boolean autenticar(String email, String senha, HttpSession session) {
+        Usuario usuario = usuarioRepository.findByEmail(email);
+
+        if (usuario != null && usuario.getSenha().equals(senha)){
+            session.setAttribute("usuarioLogado", usuario);
+            return true;
+        }
+        return false;
+    }
 
 }

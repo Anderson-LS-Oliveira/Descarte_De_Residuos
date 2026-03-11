@@ -1,10 +1,9 @@
 package ProjetoSolucaoDescarte.solucaoDescarte.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class Usuario {
@@ -17,6 +16,11 @@ public class Usuario {
     private String email;
     private String senha;
     private String telefone;
+
+    @OneToMany(mappedBy = "usuario")
+    private List<Denuncia> denuncias;
+    @OneToMany(mappedBy = "usuario")
+    private List<Coleta> coletas;
 
     public Usuario(){
     }
@@ -73,5 +77,21 @@ public class Usuario {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public List<Denuncia> getDenuncias() {
+        return denuncias;
+    }
+
+    public void setDenuncias(List<Denuncia> denuncias) {
+        this.denuncias = denuncias;
+    }
+
+    public List<Coleta> getColetas() {
+        return coletas;
+    }
+
+    public void setColetas(List<Coleta> coletas) {
+        this.coletas = coletas;
     }
 }

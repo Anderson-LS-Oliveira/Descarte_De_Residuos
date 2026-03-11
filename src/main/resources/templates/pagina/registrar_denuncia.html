@@ -2,9 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Registrar Denúncia</title>
 </head>
 <body>
+
+<h2>Registrar Denúncia</h2>
+
+<form action="/registrar_denuncia" method="post">
+
+    <label>Descrição</label><br>
+    <textarea name="descricao"></textarea>
+    <br><br>
+
+    <label>Endereço</label><br>
+    <input type="text" name="endereco">
+    <br><br>
+
+    <label>Categoria</label><br>
+    <select name="categoria_residuo">
+        <option value="RECICLAVEL">Reciclável</option>
+        <option value="ORGANICO">Orgânico</option>
+        <option value="ELETRONICO">Eletrônico</option>
+        <option value="PERIGOSO">Perigoso</option>
+        <option value="MOVEL_VOLUMOSO">Móveis volumosos</option>
+        <option value="CONSTRUCAO_CIVIL">Construção civil</option>
+    </select>
+    <br><br>
+
+    <label>Data da ocorrência</label><br>
+    <input type="date" name="dataOcorrencia">
+    <br><br>
+
+    <button type="submit">Registrar denúncia</button>
+
+</form>
+
+<br>
+
+<a href="/minhas_denuncias">Ver minhas denúncias</a>
 
 </body>
 </html>

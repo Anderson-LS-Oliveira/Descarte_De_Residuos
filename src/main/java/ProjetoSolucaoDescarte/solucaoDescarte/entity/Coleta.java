@@ -16,6 +16,9 @@ public class Coleta {
 
     @OneToMany(mappedBy = "coleta")
     private List<ImagemColeta> imagensColeta;
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
 
     public Coleta(){
     }
@@ -34,12 +37,12 @@ public class Coleta {
         this.id = id;
     }
 
-    public String getDrescricaoResiduo() {
+    public String getDescricaoResiduo() {
         return descricaoResiduo;
     }
 
-    public void setDrescricaoResiduo(String drescricaoResiduo) {
-        this.descricaoResiduo = drescricaoResiduo;
+    public void setDescricaoResiduo(String descricaoResiduo) {
+        this.descricaoResiduo = descricaoResiduo;
     }
 
     public String getEndereco() {
@@ -50,12 +53,12 @@ public class Coleta {
         this.endereco = endereco;
     }
 
-    public String getCategoriaResiduo() {
+    public String getCategoria_residuo() {
         return categoria_residuo;
     }
 
-    public void setCategoriaResiduo(String categoriaResiduo) {
-        this.categoria_residuo = categoriaResiduo;
+    public void setCategoria_residuo(String categoria_residuo) {
+        this.categoria_residuo = categoria_residuo;
     }
 
     public List<ImagemColeta> getImagensColeta() {
@@ -64,5 +67,13 @@ public class Coleta {
 
     public void setImagensColeta(List<ImagemColeta> imagensColeta) {
         this.imagensColeta = imagensColeta;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }
