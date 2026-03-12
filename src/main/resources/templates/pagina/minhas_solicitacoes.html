@@ -27,7 +27,7 @@
 
         <td th:text="${coleta.id}"></td>
 
-        <td th:text="${coleta.descricaoResiduos}"></td>
+        <td th:text="${coleta.descricaoResiduo}"></td>
 
         <td th:text="${coleta.endereco}"></td>
 
@@ -36,7 +36,7 @@
         <td th:text="${coleta.status}"></td>
 
         <td>
-            <form th:action="@{/excluir_coleta/{id}(id=${csoleta.id})}" method="post">
+            <form th:action="@{/excluir_coleta/{id}(id=${coleta.id})}" method="post">
                 <button type="submit">Excluir</button>
             </form>
         </td>
