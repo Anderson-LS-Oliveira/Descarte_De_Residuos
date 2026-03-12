@@ -18,23 +18,23 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @GetMapping("/cadastro")
+    @GetMapping("cadastro")
     public String cadastro(){
         return "pagina/cadastro";
     }
 
-    @PostMapping("/cadastro")
+    @PostMapping("cadastro")
     public String cadastrarUsuario(Usuario usuario){
         usuarioService.cadastrarUsuario(usuario);
         return "redirect:/login";
     }
 
-    @GetMapping("/login")
+    @GetMapping("login")
     public String login(){
         return "pagina/login";
     }
 
-    @PostMapping("/login")
+    @PostMapping("login")
     public String autenticar(String email, String senha, HttpSession session){
         boolean autenticado = usuarioService.autenticar(email, senha, session);
 
@@ -44,7 +44,7 @@ public class UsuarioController {
         return "pagina/login";
     }
 
-    @GetMapping("/logout")
+    @GetMapping("logout")
     public String logout(HttpSession session){
         session.invalidate();
         return "redirect:/";

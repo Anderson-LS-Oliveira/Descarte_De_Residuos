@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Index</title>
 </head>
 <body>
+
+<h2>Menu</h2>
+
+<a th:href="@{login}">Login</a><br>
+<a th:href="@{cadastro}">Cadastro</a><br>
+<!--<a th:href="@{pontos_coleta}">Pontos de Coleta</a><br>-->
+<a th:href="@{registrar_denuncia}">Denuncia</a><br>
+<a th:href="@{minhas_denuncias}">Minhas Denuncias</a><br>
+<a th:href="@{solicitar_coleta}">Solicitar Coleta</a><br>
+<a th:href="@{minhas_solicitacoes}">Minhas Solicitações</a>
 
 </body>
 </html>
