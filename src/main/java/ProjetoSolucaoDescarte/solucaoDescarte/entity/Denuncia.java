@@ -37,8 +37,7 @@ public class Denuncia {
         this.dataCriacao = LocalDate.now();
     }
 
-    public Denuncia(Long id, String descricao, String endereco, LocalDate dataOcorrencia, LocalDate dataCriacao, CategoriaResiduo categoria_residuo, StatusDenuncia status, Usuario usuario) {
-        this.id = id;
+    public Denuncia(String descricao, String endereco, LocalDate dataOcorrencia, LocalDate dataCriacao, CategoriaResiduo categoria_residuo, StatusDenuncia status, Usuario usuario) {
         this.descricao = descricao;
         this.endereco = endereco;
         this.dataOcorrencia = dataOcorrencia;

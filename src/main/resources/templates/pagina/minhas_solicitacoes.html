@@ -1,10 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Minhas Solicitações</title>
 </head>
 <body>
+
+<h2>Minhas Solicitações</h2>
+
+<a href="/solicitar_coleta">Nova solicitação</a>
+
+<br><br>
+
+<table border="1">
+
+    <tr>
+        <th>ID</th>
+        <th>Descrição</th>
+        <th>Endereço</th>
+        <th>Categoria</th>
+        <th>Status</th>
+        <th>Excluir</th>
+    </tr>
+
+    <tr th:each="coleta : ${coletas}">
+
+        <td th:text="${coleta.id}"></td>
+
+        <td th:text="${coleta.descricaoResiduos}"></td>
+
+        <td th:text="${coleta.endereco}"></td>
+
+        <td th:text="${coleta.categoria_residuo}"></td>
+
+        <td th:text="${coleta.status}"></td>
+
+        <td>
+            <form th:action="@{/excluir_coleta/{id}(id=${csoleta.id})}" method="post">
+                <button type="submit">Excluir</button>
+            </form>
+        </td>
+
+    </tr>
+
+</table>
 
 </body>
 </html>

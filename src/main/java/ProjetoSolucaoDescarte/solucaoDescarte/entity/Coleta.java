@@ -1,7 +1,10 @@
 package ProjetoSolucaoDescarte.solucaoDescarte.entity;
 
+import ProjetoSolucaoDescarte.solucaoDescarte.enumeracao.CategoriaResiduo;
+import ProjetoSolucaoDescarte.solucaoDescarte.enumeracao.StatusColeta;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -12,7 +15,12 @@ public class Coleta {
 
     private String descricaoResiduo;
     private String endereco;
-    private String categoria_residuo;
+    private LocalDate dataCriacao;
+
+    @Enumerated(EnumType.STRING)
+    private CategoriaResiduo categoria_residuo;
+    @Enumerated(EnumType.STRING)
+    private StatusColeta status;
 
     @OneToMany(mappedBy = "coleta")
     private List<ImagemColeta> imagensColeta;
@@ -23,10 +31,13 @@ public class Coleta {
     public Coleta(){
     }
 
-    public Coleta(String descricaoResiduo, String endereco, String categoria_residuo) {
+    public Coleta(String descricaoResiduo, String endereco, LocalDate dataCriacao, CategoriaResiduo categoria_residuo, StatusColeta status, Usuario usuario) {
         this.descricaoResiduo = descricaoResiduo;
         this.endereco = endereco;
+        this.dataCriacao = dataCriacao;
         this.categoria_residuo = categoria_residuo;
+        this.status = status;
+        this.usuario = usuario;
     }
 
     public Long getId() {
@@ -53,12 +64,28 @@ public class Coleta {
         this.endereco = endereco;
     }
 
-    public String getCategoria_residuo() {
+    public LocalDate getDataCriacao() {
+        return dataCriacao;
+    }
+
+    public void setDataCriacao(LocalDate dataCriacao) {
+        this.dataCriacao = dataCriacao;
+    }
+
+    public CategoriaResiduo getCategoria_residuo() {
         return categoria_residuo;
     }
 
-    public void setCategoria_residuo(String categoria_residuo) {
+    public void setCategoria_residuo(CategoriaResiduo categoria_residuo) {
         this.categoria_residuo = categoria_residuo;
+    }
+
+    public StatusColeta getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusColeta status) {
+        this.status = status;
     }
 
     public List<ImagemColeta> getImagensColeta() {

@@ -2,9 +2,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Solicitar Coleta</title>
 </head>
 <body>
+
+<h2>Solicitar Coleta</h2>
+
+<form action="/solicitar_coleta" method="post">
+
+    <label>Descrição do resíduo</label><br>
+    <textarea name="descricaoResiduo"></textarea>
+    <br><br>
+
+    <label>Endereço</label><br>
+    <input type="text" name="endereco">
+    <br><br>
+
+    <label>Categoria</label><br>
+    <select name="categoria_residuo">
+        <option value="RECICLAVEL">Reciclável</option>
+        <option value="ORGANICO">Orgânico</option>
+        <option value="ELETRONICO">Eletrônico</option>
+        <option value="PERIGOSO">Perigoso</option>
+        <option value="MOVEL_VOLUMOSO">Móveis volumosos</option>
+        <option value="CONSTRUCAO_CIVIL">Construção civil</option>
+    </select>
+    <br><br>
+
+    <button type="submit">Solicitar coleta</button>
+
+</form>
+
+<br>
+
+<a href="/minhas_solicitacoes">Ver minhas solicitações</a>
 
 </body>
 </html>
