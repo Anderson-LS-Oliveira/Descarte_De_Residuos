@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -36,14 +38,13 @@ public class DenunciaController {
     }
 
     @PostMapping("registrar_denuncia")
-    public String novaDenuncia(Denuncia denuncia, HttpSession session){
+    public String novaDenuncia(Denuncia denuncia, @RequestParam("imagens") MultipartFile[] imagens, HttpSession session){
         Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
 
         if (usuario != null) {
-            denunciaService.novaDenuncia(denuncia, usuario);
+            denunciaService.novaDenuncia(denuncia, usuario, imagens);
             return "redirect:/minhas_denuncias";
-        }
-        return "redirect:/login";
+        } return "redirect:/login";
     }
 
     @PostMapping("/excluir_denuncia/{id}")

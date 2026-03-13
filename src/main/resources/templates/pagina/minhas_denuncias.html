@@ -1,51 +1,327 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Minhas Denúncias</title>
+
+    <!-- BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- ICONES -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+
+        :root{
+        --verde:#66AA6E;
+        --cinza:#F2F2F2;
+        --preto:#151515;
+        }
+
+        body{
+        background:var(--cinza);
+        font-family:Arial, Helvetica, sans-serif;
+        padding-top:60px;
+        }
+
+        .topbar{
+        background:var(--preto);
+        height:50px;
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        padding:0 20px;
+        color:white;
+        position:fixed;
+        top:0;
+        left:0;
+        width:100%;
+        z-index:1100;
+        }
+
+        .topbar a{
+        color:white;
+        text-decoration:none;
+        font-weight:bold;
+        }
+
+        .sidebar{
+        position:fixed;
+        left:-250px;
+        top:0;
+        width:250px;
+        height:100%;
+        background:var(--preto);
+        color:white;
+        padding:20px;
+        transition:0.3s;
+        z-index:1200;
+        }
+
+        .sidebar a{
+        display:block;
+        color:white;
+        text-decoration:none;
+        margin:10px 0;
+        }
+
+        .sidebar h5{
+        color:var(--verde);
+        margin-top:20px;
+        }
+
+        .container-box{
+        background:white;
+        padding:25px;
+        border-radius:8px;
+        box-shadow:0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .btn-verde{
+        background:var(--verde);
+        color:white;
+        border:none;
+        }
+
+        .btn-verde:hover{
+        background:#5a9961;
+        }
+
+        footer{
+        background:var(--preto);
+        color:white;
+        text-align:center;
+        padding:25px;
+        margin-top:60px;
+        }
+
+        footer i{
+        font-size:22px;
+        cursor:pointer;
+        }
+
+    </style>
+
 </head>
+
 <body>
 
-<h2>Minhas Denúncias</h2>
+<!-- MENU LATERAL -->
 
-<a href="/registrar_denuncia">Nova denúncia</a>
-<a th:href="@{/}">Menu</a>
+<div id="sidebar" class="sidebar">
 
-<br><br>
+    <h5>Ações</h5>
 
-<table border="1">
+    <a th:href="@{/registrar_denuncia}">Registrar denúncia</a>
+    <a th:href="@{/solicitar_coleta}">Solicitar coleta</a>
+    <a th:href="@{/pontos_coleta}">Pontos de coleta</a>
+    <a th:href="@{/instrucoes}">Instruções de descarte</a>
 
-    <tr>
-        <th>ID</th>
-        <th>Descrição</th>
-        <th>Endereço</th>
-        <th>Categoria</th>
-        <th>Status</th>
-        <th>Excluir</th>
-    </tr>
+    <h5>Minhas atividades</h5>
 
-    <tr th:each="denuncia : ${denuncias}">
+    <a th:href="@{/minhas_denuncias}">Minhas denúncias</a>
+    <a th:href="@{/minhas_solicitacoes}">Minhas solicitações de coleta</a>
 
-        <td th:text="${denuncia.id}"></td>
+    <h5>Conta</h5>
 
-        <td th:text="${denuncia.descricao}"></td>
+    <a th:href="@{/login}">Login</a>
+    <a th:href="@{/cadastro}">Cadastro</a>
 
-        <td th:text="${denuncia.endereco}"></td>
+</div>
 
-        <td th:text="${denuncia.categoria_residuo}"></td>
+<!-- BARRA SUPERIOR -->
 
-        <td th:text="${denuncia.status}"></td>
+<div class="topbar">
 
-        <td>
-            <form th:action="@{/excluir_denuncia/{id}(id=${denuncia.id})}" method="post">
-                <button type="submit">Excluir</button>
-            </form>
-        </td>
+    <div>
+        <i class="bi bi-list fs-3" style="cursor:pointer" onclick="toggleMenu()"></i>
+    </div>
 
-    </tr>
+    <div>
+        <a th:href="@{/}">Voltar ao menu</a>
+    </div>
 
-</table>
+</div>
 
+<!-- CONTEÚDO -->
+
+<div class="container mt-5">
+
+    <div class="container-box">
+
+        <div class="d-flex justify-content-between mb-3">
+
+            <h4>Minhas Denúncias</h4>
+
+            <a th:href="@{/registrar_denuncia}" class="btn btn-verde">
+                <i class="bi bi-plus-circle"></i> Nova denúncia
+            </a>
+
+        </div>
+
+        <div class="table-responsive">
+
+            <table class="table table-striped table-bordered align-middle">
+
+                <thead class="table-dark">
+
+                <tr>
+                    <th>ID</th>
+                    <th>Descrição</th>
+                    <th>Endereço</th>
+                    <th>Categoria</th>
+                    <th>Status</th>
+                    <th>Imagens</th>
+                    <th>Ações</th>
+                </tr>
+
+                </thead>
+
+                <tbody>
+
+                <tr th:each="denuncia : ${denuncias}">
+
+                    <td th:text="${denuncia.id}"></td>
+
+                    <td th:text="${denuncia.descricaoDenuncia}"></td>
+
+                    <td th:text="${denuncia.endereco}"></td>
+
+                    <td th:text="${denuncia.categoria_residuo}"></td>
+
+                    <td>
+                        <span class="badge bg-warning text-dark"
+                              th:text="${denuncia.status}">
+                        </span>
+                    </td>
+
+                    <td>
+
+                        <button class="btn btn-primary btn-sm"
+                                data-bs-toggle="modal"
+                                th:data-bs-target="'#modalImagens' + ${denuncia.id}">
+
+                            Ver imagens
+                            (<span th:text="${#lists.size(denuncia.imagensDenuncia)}"></span>)
+
+                        </button>
+
+                    </td>
+
+                    <td>
+
+                        <form th:action="@{/excluir_denuncia/{id}(id=${denuncia.id})}" method="post">
+
+                            <button class="btn btn-danger btn-sm">
+                                <i class="bi bi-trash"></i>
+                            </button>
+
+                        </form>
+
+                    </td>
+
+                </tr>
+
+                <!-- MODAIS DAS IMAGENS -->
+
+                <tr th:each="denuncia : ${denuncias}">
+                    <td colspan="7" style="padding:0;border:none">
+
+                        <div class="modal fade"
+                             th:id="'modalImagens' + ${denuncia.id}"
+                             tabindex="-1">
+
+                            <div class="modal-dialog modal-lg">
+
+                                <div class="modal-content">
+
+                                    <div class="modal-header">
+
+                                        <h5 class="modal-title">
+                                            Imagens da denúncia <span th:text="${denuncia.id}"></span>
+                                        </h5>
+
+                                        <button type="button"
+                                                class="btn-close"
+                                                data-bs-dismiss="modal">
+                                        </button>
+
+                                    </div>
+
+                                    <div class="modal-body text-center">
+
+                                        <div th:if="${#lists.isEmpty(denuncia.imagensDenuncia)}">
+                                            <p>Nenhuma imagem enviada.</p>
+                                        </div>
+
+                                        <div th:each="img : ${denuncia.imagensDenuncia}" class="mb-3">
+
+                                            <img th:src="@{'/uploads/' + ${img.caminhoImagem}}"
+                                                 style="max-width:100%;border-radius:8px">
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </td>
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+
+<footer>
+
+    <p>Fale conosco</p>
+
+    <i class="bi bi-whatsapp me-3"></i>
+    <i class="bi bi-facebook me-3"></i>
+    <i class="bi bi-linkedin"></i>
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+
+    const sidebar = document.getElementById("sidebar");
+
+    function toggleMenu(){
+
+    if(sidebar.style.left === "0px"){
+    sidebar.style.left = "-250px";
+    }else{
+    sidebar.style.left = "0px";
+    }
+
+    }
+
+    document.addEventListener("click", function(event){
+
+    const menuIcon = document.querySelector(".bi-list");
+
+    if(!sidebar.contains(event.target) && !menuIcon.contains(event.target)){
+    sidebar.style.left = "-250px";
+    }
+
+    });
+
+</script>
 
 </body>
 </html>

@@ -1,24 +1,257 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+
+    <!-- BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- ICONES -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+
+        :root{
+        --verde:#66AA6E;
+        --cinza:#F2F2F2;
+        --preto:#151515;
+        }
+
+        body{
+        background:var(--cinza);
+        font-family:Arial, Helvetica, sans-serif;
+        padding-top:60px;
+        }
+
+        /* BARRA SUPERIOR */
+
+        .topbar{
+        background:var(--preto);
+        height:50px;
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        padding:0 20px;
+        color:white;
+
+        position:fixed;
+        top:0;
+        left:0;
+        width:100%;
+        z-index:1100;
+        }
+
+        .topbar a{
+        color:white;
+        text-decoration:none;
+        font-weight:bold;
+        }
+
+        /* MENU LATERAL */
+
+        .sidebar{
+        position:fixed;
+        left:-250px;
+        top:0;
+        width:250px;
+        height:100%;
+        background:var(--preto);
+        color:white;
+        padding:20px;
+        transition:0.3s;
+        z-index:1200;
+        }
+
+        .sidebar a{
+        display:block;
+        color:white;
+        text-decoration:none;
+        margin:10px 0;
+        }
+
+        .sidebar h5{
+        color:var(--verde);
+        margin-top:20px;
+        }
+
+        /* LOGIN */
+
+        .login-container{
+        background:white;
+        padding:30px;
+        border-radius:8px;
+        box-shadow:0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .btn-verde{
+        background:var(--verde);
+        color:white;
+        border:none;
+        }
+
+        .btn-verde:hover{
+        background:#5a9961;
+        }
+
+        /* FOOTER */
+
+        footer{
+        background:var(--preto);
+        color:white;
+        text-align:center;
+        padding:25px;
+        margin-top:60px;
+        }
+
+        footer i{
+        font-size:22px;
+        cursor:pointer;
+        }
+
+    </style>
+
 </head>
+
 <body>
 
-<form action="/login" method="post">
+<!-- MENU LATERAL -->
 
-    <label>Email</label>
-    <input type="email" name="email">
+<div id="sidebar" class="sidebar">
 
-    <label>Senha</label>
-    <input type="password" name="senha">
+    <h5>Ações</h5>
 
-    <button type="submit">Entrar</button>
+    <a th:href="@{/registrar_denuncia}">Registrar denúncia</a>
+    <a th:href="@{/solicitar_coleta}">Solicitar coleta</a>
+    <a th:href="@{/pontos_coleta}">Pontos de coleta</a>
+    <a th:href="@{/instrucoes}">Instruções de descarte</a>
 
-</form>
+    <h5>Minhas atividades</h5>
 
-<a th:href="@{/}">Menu</a>
+    <a th:href="@{/minhas_denuncias}">Minhas denúncias</a>
+    <a th:href="@{/minhas_solicitacoes}">Minhas solicitações de coleta</a>
+
+    <h5>Conta</h5>
+
+    <a th:href="@{/login}">Login</a>
+    <a th:href="@{/cadastro}">Cadastro</a>
+
+</div>
+
+<!-- BARRA SUPERIOR -->
+
+<div class="topbar">
+
+    <div>
+        <i class="bi bi-list fs-3" style="cursor:pointer" onclick="toggleMenu()"></i>
+    </div>
+
+    <div>
+        <a th:href="@{/}">Voltar ao menu</a>
+    </div>
+
+</div>
+
+<!-- FORM LOGIN -->
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-4">
+
+            <div class="login-container">
+
+                <h3 class="text-center mb-4">Login</h3>
+
+                <form action="/login" method="post">
+
+                    <div class="mb-3">
+
+                        <label class="form-label">Email</label>
+
+                        <input type="email"
+                               class="form-control"
+                               name="email"
+                               required>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label">Senha</label>
+
+                        <input type="password"
+                               class="form-control"
+                               name="senha"
+                               required>
+
+                    </div>
+
+                    <div class="d-grid">
+
+                        <button type="submit" class="btn btn-verde">
+                            <i class="bi bi-box-arrow-in-right"></i> Entrar
+                        </button>
+
+                    </div>
+
+                </form>
+
+                <div class="text-center mt-3">
+
+                    <a th:href="@{/cadastro}">
+                        Criar conta
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+
+<footer>
+
+    <p>Fale conosco</p>
+
+    <i class="bi bi-whatsapp me-3"></i>
+    <i class="bi bi-facebook me-3"></i>
+    <i class="bi bi-linkedin"></i>
+
+</footer>
+
+<script>
+
+    const sidebar = document.getElementById("sidebar");
+
+    function toggleMenu(){
+
+    if(sidebar.style.left === "0px"){
+    sidebar.style.left = "-250px";
+    }else{
+    sidebar.style.left = "0px";
+    }
+
+    }
+
+    document.addEventListener("click", function(event){
+
+    const menuIcon = document.querySelector(".bi-list");
+
+    if(!sidebar.contains(event.target) && !menuIcon.contains(event.target)){
+    sidebar.style.left = "-250px";
+    }
+
+    });
+
+</script>
 
 </body>
 </html>

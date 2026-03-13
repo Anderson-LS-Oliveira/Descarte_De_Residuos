@@ -22,7 +22,7 @@ public class Coleta {
     @Enumerated(EnumType.STRING)
     private StatusColeta status;
 
-    @OneToMany(mappedBy = "coleta")
+    @OneToMany(mappedBy = "coleta", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ImagemColeta> imagensColeta;
     @ManyToOne
     @JoinColumn(name = "usuario_id")

@@ -13,7 +13,7 @@ public class Denuncia {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String descricao;
+    private String descricaoDenuncia;
     private String endereco;
     private LocalDate dataOcorrencia;
     private LocalDate dataCriacao;
@@ -23,8 +23,8 @@ public class Denuncia {
     @Enumerated(EnumType.STRING)
     private StatusDenuncia status;
 
-    @OneToMany(mappedBy = "denuncia")
-    private List<ImagemDenuncia> imagens;
+    @OneToMany(mappedBy = "denuncia", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ImagemDenuncia> imagensDenuncia;
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
@@ -37,8 +37,8 @@ public class Denuncia {
         this.dataCriacao = LocalDate.now();
     }
 
-    public Denuncia(String descricao, String endereco, LocalDate dataOcorrencia, LocalDate dataCriacao, CategoriaResiduo categoria_residuo, StatusDenuncia status, Usuario usuario) {
-        this.descricao = descricao;
+    public Denuncia(String descricaoDenuncia, String endereco, LocalDate dataOcorrencia, LocalDate dataCriacao, CategoriaResiduo categoria_residuo, StatusDenuncia status, Usuario usuario) {
+        this.descricaoDenuncia = descricaoDenuncia;
         this.endereco = endereco;
         this.dataOcorrencia = dataOcorrencia;
         this.dataCriacao = dataCriacao;
@@ -55,12 +55,12 @@ public class Denuncia {
         this.id = id;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getDescricaoDenuncia() {
+        return descricaoDenuncia;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setDescricaoDenuncia(String descricaoDenuncia) {
+        this.descricaoDenuncia = descricaoDenuncia;
     }
 
     public String getEndereco() {
@@ -103,12 +103,12 @@ public class Denuncia {
         this.status = status;
     }
 
-    public List<ImagemDenuncia> getImagens() {
-        return imagens;
+    public List<ImagemDenuncia> getImagensDenuncia() {
+        return imagensDenuncia;
     }
 
-    public void setImagens(List<ImagemDenuncia> imagens) {
-        this.imagens = imagens;
+    public void setImagensDenuncia(List<ImagemDenuncia> imagensDenuncia) {
+        this.imagensDenuncia = imagensDenuncia;
     }
 
     public Usuario getUsuario() {

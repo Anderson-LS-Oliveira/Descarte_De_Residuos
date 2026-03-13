@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -36,11 +38,11 @@ public class ColetaController {
     }
 
     @PostMapping("solicitar_coleta")
-    public String novaColeta(Coleta coleta, HttpSession session){
+    public String novaColeta(Coleta coleta, @RequestParam("imagens") MultipartFile[] imagens,HttpSession session){
         Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
 
         if (usuario != null){
-            coletaService.novaColeta(coleta, usuario);
+            coletaService.novaColeta(coleta, usuario, imagens);
             return "redirect:/minhas_solicitacoes";
         } return "redirect:/login";
     }
@@ -50,7 +52,7 @@ public class ColetaController {
         Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
 
         coletaService.excluirColeta(id, usuario);
-        return "redirect:/minhas_coletas";
+        return "redirect:/minhas_solicitacoes";
     }
 
 

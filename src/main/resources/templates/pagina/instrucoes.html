@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Instruções de Descarte</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+
+        :root{
+        --verde:#66AA6E;
+        --cinza:#F2F2F2;
+        --preto:#151515;
+        }
+
+        body{
+        background:var(--cinza);
+        font-family:Arial, Helvetica, sans-serif;
+        padding-top:60px;
+        }
+
+        .topbar{
+        background:var(--preto);
+        height:50px;
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        padding:0 20px;
+        color:white;
+
+        position:fixed;
+        top:0;
+        left:0;
+        width:100%;
+        z-index:1100;
+        }
+
+        .topbar a{
+        color:white;
+        text-decoration:none;
+        font-weight:bold;
+        }
+
+        .sidebar{
+        position:fixed;
+        left:-250px;
+        top:0;
+        width:250px;
+        height:100%;
+        background:var(--preto);
+        color:white;
+        padding:20px;
+        transition:0.3s;
+        z-index:1200;
+        }
+
+        .sidebar a{
+        display:block;
+        color:white;
+        text-decoration:none;
+        margin:10px 0;
+        }
+
+        .sidebar h5{
+        color:var(--verde);
+        margin-top:20px;
+        }
+
+        h2{
+        text-align:center;
+        margin-bottom:40px;
+        }
+
+        h3{
+        margin-top:50px;
+        color:var(--verde);
+        }
+
+        footer{
+        background:var(--preto);
+        color:white;
+        text-align:center;
+        padding:25px;
+        margin-top:60px;
+        }
+
+        footer i{
+        font-size:22px;
+        cursor:pointer;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div id="sidebar" class="sidebar">
+
+    <h5>Ações</h5>
+
+    <a th:href="@{/registrar_denuncia}">Registrar denúncia</a>
+    <a th:href="@{/solicitar_coleta}">Solicitar coleta</a>
+    <a th:href="@{/pontos_coleta}">Pontos de coleta</a>
+    <a th:href="@{/instrucoes}">Instruções de descarte</a>
+
+    <h5>Minhas atividades</h5>
+
+    <a th:href="@{/minhas_denuncias}">Minhas denúncias</a>
+    <a th:href="@{/minhas_solicitacoes}">Minhas solicitações de coleta</a>
+
+    <h5>Conta</h5>
+
+    <a th:href="@{/login}">Login</a>
+    <a th:href="@{/cadastro}">Cadastro</a>
+
+</div>
+
+<div class="topbar">
+
+    <div>
+        <i class="bi bi-list fs-3" style="cursor:pointer" onclick="toggleMenu()"></i>
+    </div>
+
+    <div>
+        <a th:href="@{/}">Voltar ao menu</a>
+    </div>
+
+</div>
+
+<div class="container">
+
+    <h2>Instruções de Descarte</h2>
+
+    <!-- RECICLÁVEIS -->
+
+    <h3 id="reciclaveis">Resíduos Recicláveis</h3>
+
+    <p>
+        Os resíduos recicláveis são materiais que podem ser reaproveitados por meio de processos de reciclagem, retornando ao ciclo produtivo como matéria-prima para a fabricação de novos produtos.
+        Esses resíduos são bastante comuns no dia a dia da população, sendo gerados principalmente em residências, comércios e escritórios.
+    </p>
+
+    <h5>Materiais recicláveis</h5>
+
+    <ul>
+        <li>Papel e papelão</li>
+        <li>Plásticos</li>
+        <li>Vidros</li>
+        <li>Metais</li>
+    </ul>
+
+    <p>
+        A reciclagem permite que diversos materiais sejam reaproveitados em vez de descartados como lixo comum. Esse processo ajuda a reduzir a quantidade de resíduos enviados para aterros sanitários e contribui para o uso mais eficiente dos recursos naturais.
+        Além disso, a reciclagem também gera oportunidades de trabalho em cooperativas e empresas especializadas na coleta e processamento desses materiais.
+    </p>
+
+    <p>
+        Quando resíduos recicláveis são descartados junto com lixo comum ou em locais inadequados, muitas vezes eles acabam sendo enviados para aterros sanitários ou descartados de forma irregular.
+        Isso impede que esses materiais sejam reciclados e pode contribuir para o aumento da poluição urbana, já que alguns desses resíduos levam muito tempo para se decompor no meio ambiente.
+    </p>
+
+    <h5>Separação correta</h5>
+
+    <ul>
+        <li>Retirar restos de alimentos das embalagens</li>
+        <li>Dobrar caixas de papelão</li>
+        <li>Amassar garrafas plásticas</li>
+    </ul>
+
+    <h5>Materiais que geralmente não são aceitos</h5>
+
+    <ul>
+        <li>Papéis muito engordurados</li>
+        <li>Espelhos</li>
+        <li>Cerâmicas</li>
+        <li>Vidros quebrados misturados</li>
+    </ul>
+
+    <hr>
+
+    <!-- ORGÂNICOS -->
+
+    <h3 id="organicos">Resíduos Orgânicos</h3>
+
+    <p>
+        Os resíduos orgânicos são materiais de origem biológica que se decompõem naturalmente com o passar do tempo. Eles são gerados principalmente em atividades domésticas, restaurantes, feiras, mercados e outros locais onde há manipulação ou consumo de alimentos.
+        Esse tipo de resíduo costuma representar uma parte significativa do lixo produzido diariamente nas residências.
+    </p>
+
+    <h5>Exemplos</h5>
+
+    <ul>
+        <li>Restos de alimentos</li>
+        <li>Cascas de frutas</li>
+        <li>Borra de café</li>
+        <li>Folhas secas</li>
+    </ul>
+
+    <p>
+        Quando os resíduos orgânicos são descartados de forma incorreta, principalmente misturados com outros tipos de lixo, podem gerar diversos problemas ambientais e urbanos.
+        A decomposição desses materiais pode produzir mau cheiro, atrair insetos e animais, além de contribuir para o aumento da produção de chorume, um líquido resultante da decomposição que pode contaminar o solo e a água.
+        Além disso, quando resíduos orgânicos são misturados com materiais recicláveis, eles podem contaminar esses materiais, dificultando ou até impedindo o processo de reciclagem.
+    </p>
+
+    <h5>Separação correta</h5>
+
+    <ul>
+        <li>Separar do lixo reciclável</li>
+        <li>Utilizar lixeira específica</li>
+        <li>Evitar misturar embalagens</li>
+        <li>Descartar líquidos separadamente</li>
+    </ul>
+
+    <hr>
+
+    <!-- ELETRÔNICOS -->
+
+    <h3 id="eletronicos">Resíduos Eletrônicos</h3>
+
+    <p>
+        Os resíduos eletrônicos, também chamados de lixo eletrônico, são equipamentos que utilizam componentes elétricos ou eletrônicos e que deixaram de funcionar, tornaram-se obsoletos ou foram substituídos por modelos mais novos.
+        Esse tipo de resíduo tem se tornado cada vez mais comum devido ao avanço da tecnologia e à rápida substituição de aparelhos eletrônicos no dia a dia.
+    </p>
+
+    <h5>Exemplos</h5>
+
+    <ul>
+        <li>Celulares</li>
+        <li>Computadores</li>
+        <li>Impressoras</li>
+        <li>Televisores</li>
+        <li>Cabos e carregadores</li>
+    </ul>
+
+    <p>
+        O descarte incorreto de resíduos eletrônicos pode causar diversos impactos ambientais. Muitos aparelhos contêm substâncias que podem ser prejudiciais quando entram em contato com o solo ou com a água.
+        Além disso, quando esses equipamentos são descartados junto com o lixo comum, materiais que poderiam ser reaproveitados acabam sendo perdidos.
+    </p>
+
+    <h5>Separação correta</h5>
+
+    <ul>
+        <li>Não descartar no lixo comum</li>
+        <li>Separar os dispositivos completos</li>
+        <li>Guardar pequenos eletrônicos em caixas</li>
+        <li>Separar cabos e acessórios</li>
+    </ul>
+
+    <hr>
+
+    <!-- PERIGOSOS -->
+
+    <h3 id="perigosos">Resíduos Perigosos</h3>
+
+    <p>
+        Os resíduos perigosos são materiais que apresentam algum tipo de risco à saúde humana ou ao meio ambiente devido às suas características químicas, tóxicas, inflamáveis ou corrosivas. Por esse motivo, esses resíduos exigem cuidados especiais no momento do armazenamento, transporte e descarte.
+
+        Muitos desses materiais estão presentes no cotidiano das pessoas, principalmente em produtos utilizados em residências, veículos e atividades de manutenção.
+    </p>
+
+    <h5>Exemplos</h5>
+
+    <ul>
+        <li>Pilhas e baterias</li>
+        <li>Tintas e solventes</li>
+        <li>Lâmpadas fluorescentes</li>
+        <li>Medicamentos vencidos</li>
+    </ul>
+
+    <p>
+        O descarte incorreto de resíduos perigosos pode causar impactos significativos ao meio ambiente e à saúde das pessoas. Muitas dessas substâncias possuem componentes tóxicos que podem se infiltrar no solo e atingir lençóis freáticos.
+
+        Além disso, alguns materiais podem apresentar risco de incêndio, explosão ou liberação de substâncias prejudiciais quando misturados com outros tipos de resíduos.
+    </p>
+
+    <h5>Cuidados</h5>
+
+    <ul>
+        <li>Não descartar no lixo comum</li>
+        <li>Manter nas embalagens originais</li>
+        <li>Não misturar produtos químicos</li>
+        <li>Armazenar em local seguro</li>
+    </ul>
+
+    <hr>
+
+    <!-- MÓVEIS -->
+
+    <h3 id="moveis">Móveis e Itens Volumosos</h3>
+
+    <p>
+        Os móveis e itens volumosos são resíduos de grande porte que normalmente não podem ser descartados junto com o lixo comum devido ao seu tamanho ou peso. Esses objetos geralmente são provenientes da substituição de móveis antigos, mudanças de residência ou reformas.
+
+        Por ocuparem muito espaço e não serem facilmente transportados pelos sistemas de coleta convencional, esses materiais costumam exigir coleta específica ou descarte em locais apropriados.
+    </p>
+
+    <h5>Exemplos</h5>
+
+    <ul>
+        <li>Sofás</li>
+        <li>Mesas</li>
+        <li>Colchões</li>
+        <li>Armários</li>
+    </ul>
+
+    <h5>Recomendações</h5>
+
+    <ul>
+        <li>Separar do lixo comum</li>
+        <li>Desmontar quando possível</li>
+        <li>Agrupar peças do móvel</li>
+        <li>Não abandonar em vias públicas</li>
+    </ul>
+
+    <hr>
+
+    <!-- CONSTRUÇÃO -->
+
+    <h3 id="construcao">Resíduos de Construção Civil</h3>
+
+    <p>
+        Os resíduos de construção civil são materiais gerados durante obras, reformas, demolições ou pequenas manutenções em residências e estabelecimentos. Esses resíduos costumam ser compostos principalmente por materiais utilizados em estruturas, acabamentos e instalações.
+
+        Por possuírem características diferentes do lixo doméstico comum, esses materiais normalmente não são recolhidos pela coleta convencional e precisam ser descartados em locais apropriados.
+    </p>
+
+    <h5>Exemplos</h5>
+
+    <ul>
+        <li>Tijolos</li>
+        <li>Blocos de concreto</li>
+        <li>Azulejos</li>
+        <li>Entulho de obra</li>
+    </ul>
+
+    <p>
+        Quando resíduos de construção civil são descartados de forma irregular, como em terrenos vazios, margens de rios ou áreas públicas, podem causar diversos problemas urbanos.
+
+        O acúmulo de entulho pode bloquear bueiros e sistemas de drenagem, contribuindo para alagamentos durante os períodos de chuva. Além disso, o descarte irregular pode degradar o ambiente urbano e gerar acúmulo de sujeira em determinados locais.
+    </p>
+
+    <h5>Separação correta</h5>
+
+    <ul>
+        <li>Separar do lixo doméstico</li>
+        <li>Agrupar materiais semelhantes</li>
+        <li>Não misturar com produtos químicos</li>
+        <li>Utilizar caçambas para grandes volumes</li>
+    </ul>
+
+</div>
+
+<footer>
+
+    <p>Fale conosco</p>
+
+    <i class="bi bi-whatsapp me-3"></i>
+    <i class="bi bi-facebook me-3"></i>
+    <i class="bi bi-linkedin"></i>
+
+</footer>
+
+<script>
+
+    const sidebar = document.getElementById("sidebar");
+
+    function toggleMenu(){
+
+    if(sidebar.style.left === "0px"){
+    sidebar.style.left = "-250px";
+    }else{
+    sidebar.style.left = "0px";
+    }
+
+    }
+
+    document.addEventListener("click", function(event){
+
+    const menuIcon = document.querySelector(".bi-list");
+
+    if(!sidebar.contains(event.target) && !menuIcon.contains(event.target)){
+    sidebar.style.left = "-250px";
+    }
+
+    });
+
+</script>
+
+</body>
+</html>

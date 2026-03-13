@@ -1,20 +1,402 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>Index</title>
+    <title>Descarte de Resíduos</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+
+        :root{
+        --verde:#66AA6E;
+        --cinza:#F2F2F2;
+        --preto:#151515;
+        }
+
+        body{
+        background:var(--cinza);
+        font-family:Arial, Helvetica, sans-serif;
+        padding-top:60px;
+        }
+
+        /* BARRA SUPERIOR */
+
+        .topbar{
+        background:var(--preto);
+        height:50px;
+        display:flex;
+        align-items:center;
+        padding:0 20px;
+        color:white;
+
+        position:fixed;
+        top:0;
+        left:0;
+        width:100%;
+
+        z-index:1100;
+        }
+
+        /* MENU LATERAL */
+
+        .sidebar{
+        position:fixed;
+        left:-250px;
+        top:0;
+        width:250px;
+        height:100%;
+        background:var(--preto);
+        color:white;
+        padding:20px;
+        transition:0.3s;
+        z-index:1200;
+        }
+
+        .sidebar a{
+        display:block;
+        color:white;
+        text-decoration:none;
+        margin:10px 0;
+        }
+
+        .sidebar h5{
+        color:var(--verde);
+        margin-top:20px;
+        }
+
+        /* HERO */
+
+        .hero{
+        background:url("https://www.correiobraziliense.com.br/cbradar/wp-content/uploads/2025/02/Joinville_1740199019417.jpg") center/cover;
+        height:350px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        text-align:center;
+        color:white;
+        }
+
+        .hero-box{
+        background:rgba(0,0,0,0.5);
+        padding:30px;
+        max-width:650px;
+        }
+
+        /* BOTÕES */
+
+        .categoria-btn{
+        background:var(--verde);
+        color:white;
+        border:none;
+        padding:15px;
+        border-radius:6px;
+        width:120px;
+        text-align:center;
+        text-decoration:none;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        font-size:14px;
+        }
+
+        .categoria-btn i{
+        font-size:28px;
+        margin-bottom:5px;
+        }
+
+        /* SEÇÕES TEXTO */
+
+        .info-section{
+        padding:50px 0;
+        }
+
+        .info-img{
+        width:100%;
+        border-radius:6px;
+        }
+
+        /* FOOTER */
+
+        footer{
+        background:var(--preto);
+        color:white;
+        text-align:center;
+        padding:25px;
+        margin-top:40px;
+        }
+
+        footer i{
+        font-size:22px;
+        cursor:pointer;
+        }
+
+    </style>
+
 </head>
+
 <body>
 
-<h2>Menu</h2>
+<!-- MENU LATERAL -->
 
-<a th:href="@{login}">Login</a><br>
-<a th:href="@{cadastro}">Cadastro</a><br>
-<!--<a th:href="@{pontos_coleta}">Pontos de Coleta</a><br>-->
-<a th:href="@{registrar_denuncia}">Denuncia</a><br>
-<a th:href="@{minhas_denuncias}">Minhas Denuncias</a><br>
-<a th:href="@{solicitar_coleta}">Solicitar Coleta</a><br>
-<a th:href="@{minhas_solicitacoes}">Minhas Solicitações</a>
+<div id="sidebar" class="sidebar">
+
+    <h5>Ações</h5>
+
+    <a th:href="@{/registrar_denuncia}">Registrar denúncia</a>
+    <a th:href="@{/solicitar_coleta}">Solicitar coleta</a>
+    <a th:href="@{/pontos_coleta}">Pontos de coleta</a>
+    <a th:href="@{/instrucoes}">Instruções de descarte</a>
+
+    <h5>Minhas atividades</h5>
+
+    <a th:href="@{/minhas_denuncias}">Minhas denúncias</a>
+    <a th:href="@{/minhas_solicitacoes}">Minhas solicitações de coleta</a>
+
+    <h5>Conta</h5>
+
+    <a th:href="@{/login}">Login</a>
+    <a th:href="@{/cadastro}">Cadastro</a>
+
+</div>
+
+
+<!-- BARRA SUPERIOR -->
+
+<div class="topbar">
+
+    <i class="bi bi-list fs-3" style="cursor:pointer" onclick="toggleMenu()"></i>
+
+</div>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-box">
+
+        <h1>Descarte de Resíduos</h1>
+
+        <p>
+
+            Este site foi criado para ajudar a população a realizar o descarte correto
+            de resíduos de forma simples e acessível. Aqui você pode encontrar
+            informações sobre diferentes tipos de materiais, localizar pontos de
+            descarte próximos e solicitar coleta para itens de grande porte.
+
+            <br><br>
+
+            Além disso, o sistema permite registrar denúncias de descarte irregular,
+            contribuindo para uma cidade mais limpa, organizada e sustentável.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- GRUPOS DE RESÍDUOS -->
+
+<div class="container text-center mt-5">
+
+    <h2 class="mb-4">Grupos de Resíduos</h2>
+
+    <div class="d-flex justify-content-center gap-3 flex-wrap">
+
+        <a th:href="@{/instrucoes#reciclaveis}" class="categoria-btn">
+            <i class="bi bi-recycle"></i>
+            Recicláveis
+        </a>
+
+        <a th:href="@{/instrucoes#organicos}" class="categoria-btn">
+            <i class="bi bi-apple"></i>
+            Orgânicos
+        </a>
+
+        <a th:href="@{/instrucoes#eletronicos}" class="categoria-btn">
+            <i class="bi bi-cpu"></i>
+            Eletrônicos
+        </a>
+
+        <a th:href="@{/instrucoes#perigosos}" class="categoria-btn">
+            <i class="bi bi-exclamation-triangle"></i>
+            Perigosos
+        </a>
+
+        <a th:href="@{/instrucoes#moveis}" class="categoria-btn">
+            <i class="bi bi-door-open"></i>
+            Móveis
+        </a>
+
+        <a th:href="@{/instrucoes#construcao}" class="categoria-btn">
+            <i class="bi bi-hammer"></i>
+            Construção
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- TEXTO 1 -->
+
+<div class="container info-section">
+
+    <div class="row align-items-center">
+
+        <div class="col-md-6">
+
+            <h4>O impacto do descarte incorreto</h4>
+
+            <p>
+
+                O descarte inadequado de resíduos é um problema presente em muitas cidades
+                e gera impactos que vão além da poluição visual.
+
+                Quando materiais são descartados de forma irregular, podem contaminar
+                o solo, a água e o ar, além de contribuir para o entupimento de bueiros
+                e enchentes.
+
+                Pequenas atitudes no dia a dia, como separar corretamente os resíduos
+                e utilizar locais apropriados de descarte, ajudam a construir cidades
+                mais limpas e sustentáveis.
+
+            </p>
+
+        </div>
+
+        <div class="col-md-6">
+
+            <img class="info-img"
+                 src="https://conteudo.imguol.com.br/c/noticias/25/2024/12/07/imagem-aerea-mostra-ruas-de-joinville-completamente-alagadas-1733589788322_v2_4x3.jpg">
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- TEXTO 2 -->
+
+<div class="container info-section">
+
+    <div class="row align-items-center">
+
+        <div class="col-md-6">
+
+            <img class="info-img"
+                 src="https://biocomp.com.br/wp-content/uploads/2017/04/coleta-seletiva-para-gerenciamento-de-residuos-scaled-1.jpg">
+
+        </div>
+
+        <div class="col-md-6">
+
+            <h4>A importância da informação</h4>
+
+            <p>
+
+                Muitas vezes, o descarte incorreto não acontece por má intenção,
+                mas por falta de informação.
+
+                Muitas pessoas não sabem que certos materiais,
+                como eletrônicos, pilhas ou óleo de cozinha,
+                não devem ser descartados junto ao lixo comum.
+
+                Ter acesso a informações claras sobre como e onde descartar cada tipo
+                de resíduo é um passo fundamental para promover práticas mais
+                responsáveis e conscientes no cotidiano da população.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- TEXTO 3 -->
+
+<div class="container info-section">
+
+    <div class="row align-items-center">
+
+        <div class="col-md-6">
+
+            <h4>O papel da população</h4>
+
+            <p>
+
+                A preservação do espaço urbano e do meio ambiente depende também
+                da participação ativa da sociedade.
+
+                Denunciar descartes irregulares, utilizar pontos de coleta adequados
+                e incentivar práticas sustentáveis são atitudes que ajudam
+                a reduzir problemas ambientais nas cidades.
+
+                A colaboração entre cidadãos e iniciativas que promovem o descarte
+                correto é essencial para criar comunidades mais organizadas,
+                saudáveis e ambientalmente responsáveis.
+
+            </p>
+
+        </div>
+
+        <div class="col-md-6">
+
+            <img class="info-img"
+                 src="https://mercosulnegocios.com.br/wp-content/uploads/2024/12/Depositphotos_199509362_XL.jpg">
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<footer>
+
+    <p>Fale conosco</p>
+
+    <i class="bi bi-whatsapp me-3"></i>
+    <i class="bi bi-facebook me-3"></i>
+    <i class="bi bi-linkedin"></i>
+
+</footer>
+
+
+<script>
+
+    const sidebar = document.getElementById("sidebar");
+
+    function toggleMenu(){
+
+    if (sidebar.style.left === "0px"){
+    sidebar.style.left = "-250px";
+    }else{
+    sidebar.style.left = "0px";
+    }
+
+    }
+
+    document.addEventListener("click", function(event){
+
+    const menuIcon = document.querySelector(".bi-list");
+
+    if (!sidebar.contains(event.target) && !menuIcon.contains(event.target)){
+    sidebar.style.left = "-250px";
+    }
+
+    });
+
+</script>
 
 </body>
 </html>
